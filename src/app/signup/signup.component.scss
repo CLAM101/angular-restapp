@@ -1,0 +1,53 @@
+.container {
+    text-align: center;
+    background-color: #31C6D4;
+    height: 100%;
+}
+.signup-container{
+    padding-top: 12%;
+}
+
+.input-container{
+    margin-top: 20px;
+}
+button{
+    margin-top:20px;
+    width: 17.5%;
+    height:40px;
+    margin-bottom: 10px;
+}
+label{
+    
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    padding-right: 11%;
+}
+input{
+    height:40px;
+    border-radius: 5px;
+    width: 17%;
+    border-width: 0px;
+}
+
+h1{
+    font-weight: bold;
+    font-size:45px;
+}
+input::placeholder{
+font-size:16px;
+display:flex;
+margin-top:20px
+}
+.first{
+    width: 7.7%;
+    margin-top: 13px;
+}
+.last{
+    width: 7.6%;
+    margin-top: 13px;
+    margin-left: 20px;
+}
+.title-text {
+    margin-bottom: 3%;
+}

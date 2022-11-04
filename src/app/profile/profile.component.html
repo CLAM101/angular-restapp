@@ -1,0 +1,20 @@
+<div class="profile-container" *ngIf="profile">
+  <h2>{{ profile.title }}</h2>
+  <div><img class="profile-img" [src]="profile.imagePath" /></div>
+  <button mat-raised-button>Edit Picture</button>
+  <form [formGroup]="imageForm" (submit)="onSubmit()">
+    <div>
+      <input formControlName="name" type="text" placeholder="Enter name" />
+    </div>
+    <div><input (change)="onFileSelect($event)" type="file" /></div>
+    <div *ngIf="imageData">
+      <img [src]="imageData" [alt]="imageForm.value.name" />
+    </div>
+    <div>
+      <button type="submit">Upload</button>
+    </div>
+  </form>
+  <h2>{{ profile.email }}</h2>
+  <h2>{{ profile.description }}</h2>
+  <h2>{{ profile.rating }}</h2>
+</div>

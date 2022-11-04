@@ -1,0 +1,52 @@
+.menu-container{
+    width:100%;
+    height: 10%;
+    background-color: black;
+    
+}
+.button-container {
+    background-color: black;
+}
+.menu-button {
+    height: 100%;
+    width: 8%;
+    font-weight: bold;
+    font-size: 3vmin;
+    color:#31C6D4;
+}
+.profile-container {
+    top: 1%;
+    display: inline;
+    text-align: right;
+    position: absolute;
+    right: 1%;
+    width:35%
+}
+#profile-image{
+    height: 8vmin;
+    width:8vmin;
+    margin: 0%;
+    position: relative;
+    border-radius: 100px;
+    top: 10%
+}
+#profile-text {
+    position: absolute;
+    right: 15%;
+    font-size: 2vmin;
+    display: inline;
+}
+#rating-text{
+    position: absolute;
+    right: 15%;
+    top: 40%;
+    font-size: 2vmin;
+    display: inline;
+}
+.profile-anchor {
+   color: #31C6D4
+}
+button {
+    background-color: black;
+    color: #31C6D4;
+}

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="button-container">
+    <button (click)="routeSwitchMain()" color="primary" mat-raised-button>
+      Main Menu
+    </button>
+    <button (click)="routeSwitchSide()" color="primary" mat-raised-button>
+      Sides Menu
+    </button>
+  </div>
+  <div *ngIf="route$ | async; else elseBlock">
+    <div *ngIf="itemTypes">
+      <button routerLink="../menuadd" color="primary" mat-raised-button>
+        Add Menu Item
+      </button>
+      <h1>Main Menu</h1>
+      <div class="menu-list-container" *ngFor="let item of items; index as i">
+        <h1>{{ item.toUpperCase() }}</h1>
+
+        <div class="menu-list">
+          <div
+            class="example-card"
+            *ngFor="let itemType of itemTypes[i].items; index as x"
+          >
+            <mat-card class="list-item">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{
+                  itemTypes[i].items[x].name
+                }}</mat-card-title>
+                <mat-card-subtitle>
+                  Price:{{ itemTypes[i].items[x].price }}</mat-card-subtitle
+                >
+              </mat-card-header>
+              <img
+                mat-card-image
+                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu"
+              />
+              <mat-card-content>
+                <p>Description: {{ itemTypes[i].items[x].description }}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Edit</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div *ngIf="sidesmenu">
+      <button (click)="routeSwitchSide()" color="primary" mat-raised-button>
+        Add Menu Item
+      </button>
+      <h1>Sides Menu</h1>
+
+      <div class="menu-list">
+        <div class="example-card" *ngFor="let sides of sidesmenu">
+          <mat-card class="list-item">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{ sides.name }}</mat-card-title>
+              <mat-card-subtitle>{{ sides.price }}</mat-card-subtitle>
+            </mat-card-header>
+            <img
+              mat-card-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+              alt="Photo of a Shiba Inu"
+            />
+            <mat-card-content>
+              <p>
+                {{ sides.description }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -5,11 +5,16 @@
   "projects": {
     "restWebApp": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -23,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -62,6 +68,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "restWebApp:build"
+            
+          },
           "configurations": {
             "production": {
               "browserTarget": "restWebApp:build:production"
@@ -90,7 +100,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              
+              "src/styles.scss"
             ],
             "scripts": []
           }

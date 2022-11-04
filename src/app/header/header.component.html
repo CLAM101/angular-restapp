@@ -1,0 +1,23 @@
+<div class="menu-container">
+  <button class="menu-button" mat-icon-button [matMenuTriggerFor]="beforeMenu">
+    Budget Bites
+  </button>
+
+  <mat-menu class="menu" #beforeMenu="matMenu" xPosition="before">
+    <div class="button-container">
+      <button routerLink="homelanding" mat-menu-item>Home</button>
+      <button routerLink="orderhistory" mat-menu-item>Order History</button>
+      <button routerLink="ordertrack" mat-menu-item>Track Orders</button>
+      <button routerLink="profile" mat-menu-item>Profile</button>
+      <button routerLink="menu" mat-menu-item>Menu</button>
+      <button (click)="logout()" mat-menu-item>Logout</button>
+    </div>
+  </mat-menu>
+
+  <a *ngIf="profile" class="profile-anchor" routerLink="profile" href=""
+    ><div class="profile-container">
+      <h2 id="profile-text">{{ profile.title }}</h2>
+      <h2 id="rating-text">Current Rating: {{ profile.rating }}</h2>
+      <img id="profile-image" [src]="profile.imagePath" [alt]="" /></div
+  ></a>
+</div>

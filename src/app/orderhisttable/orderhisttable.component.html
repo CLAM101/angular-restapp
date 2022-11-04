@@ -1,0 +1,38 @@
+<div>
+    <button mat-raised-button class="refresh-button" (click)="GetOrderHistory()">Refresh</button>
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+              
+        <!-- Adjsut Order Column -->
+        <ng-container class="table-column" matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell  *matCellDef="let element"> {{element.status}}</td>
+        </ng-container>
+              
+        <!-- Position Column -->
+        <ng-container class="table-column" matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+        </ng-container>
+      
+        <!-- Total Column -->
+        <ng-container class="table-column" matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+      
+        <!-- OrderData Column -->
+        <ng-container class="table-column" matColumnDef="order-data">
+          <th mat-header-cell *matHeaderCellDef> OrderData </th>
+          <td mat-cell *matCellDef="let element"> {{element.orderData}} </td>
+        </ng-container>
+       
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+
+
+</div>

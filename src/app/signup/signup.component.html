@@ -1,0 +1,37 @@
+<div class="container">
+<div class="signup-container">
+  <h1 class="title-text">Budget Bites Apply</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="restApply()" >
+    
+<div class="input-container" >
+  <input placeholder="Store name"  matInput formControlName="storename">
+</div>
+
+<div class="input-container" >
+  <input   placeholder="Store Address" matInput formControlName="storeaddress">
+</div>
+
+<div class="input-container" >
+  <input   placeholder="Floor/Suite (Optional)" matInput formControlName="floorsuite">
+</div>
+
+<div class="input-container-firstlast" >
+  <input class="first"  placeholder="First Name" matInput formControlName="firstname">
+  <input class="last"   placeholder="Last Name" matInput formControlName="lastname">
+</div>
+
+<div class="input-container" >
+  <input  placeholder="Email" matInput formControlName="email">
+</div>
+
+<div class="input-container" >
+  <input  placeholder="Phone" matInput formControlName="phone">
+</div>
+
+<div class="example-button-row" style="margin-top: 5px">
+  <button mat-raised-button color="primary">Submit</button> 
+</div>
+</form>
+ <a routerLink="../login">Already have an account?</a>
+</div>
+</div>

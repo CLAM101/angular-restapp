@@ -1,0 +1,38 @@
+.container {
+    height: 90%;
+    text-align: center;
+    background-color:#31C6D4 ;
+}
+button {
+    margin-top: 1%;
+    align-items: center;
+    text-align: center;
+    width: 45%;
+    height: 55%;
+    font-size: 200%;
+    margin-left: 2%;
+}
+.button-container{
+   
+    height: 10%;
+   
+}
+.example-card{
+    height: 100%;
+    width: 100%;
+  
+}
+.list-item{
+    margin: 5%;
+    
+}
+.menu-list{
+    background-color:#31C6D4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+}
+
+.ng-star-inserted {
+    background-color: #31C6D4;
+}

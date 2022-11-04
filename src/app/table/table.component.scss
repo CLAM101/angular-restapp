@@ -1,0 +1,48 @@
+
+table {
+    width: 100%;
+    background-color: #31C6D4;
+    border-width: 3px;
+    border-radius: 10px;
+    align-items: center;
+  }
+  button {
+    background-color:black;
+    color: white;
+    width: 60%;
+    font-size: 15px;
+   
+    border-radius: 10px;
+   
+  }
+  .refresh-button {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+  }
+  .mat-column-button {
+    font-weight: bold;
+   
+  }
+  .mat-column-id {
+    font-weight: bold;
+    
+  }
+  .mat-column-status {
+    font-weight: bold;
+    
+  }
+  .mat-column-total {
+    font-weight: bold;
+    
+  }
+  .mat-column-order-data {
+    font-weight: bold;
+    
+  }
+  .mat-header-cell {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    align-items: center;
+  }
