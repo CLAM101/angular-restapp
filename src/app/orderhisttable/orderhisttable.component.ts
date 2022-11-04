@@ -16,8 +16,8 @@ export class OrderhisttableComponent implements OnInit {
     private pusherService: PusherService
   ) {}
 
-  GetOrderHistory(): void {
-    this.orderService.GetOrderHistory().subscribe((result) => {
+  getOrderHistory(): void {
+    this.orderService.getOrderHistory().subscribe((result) => {
       console.log('result on get active orders', result);
 
       this.dataSource = result;
@@ -25,6 +25,6 @@ export class OrderhisttableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.GetOrderHistory();
+    this.getOrderHistory();
   }
 }

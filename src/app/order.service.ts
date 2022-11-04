@@ -17,18 +17,18 @@ export class OrderService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  public GetActiveOrders(): Observable<ActiveOrderItem[]> {
+  public getActiveOrders(): Observable<ActiveOrderItem[]> {
     return this.http.get<ActiveOrderItem[]>(this.restURL + '/getactiveorders', {
       withCredentials: true,
     });
   }
-  public GetOrderHistory(): Observable<ActiveOrderItem[]> {
+  public getOrderHistory(): Observable<ActiveOrderItem[]> {
     return this.http.get<ActiveOrderItem[]>(this.restURL + '/getorderhistory', {
       withCredentials: true,
     });
   }
 
-  public AdjustOrderStatus(
+  public adjustOrderStatus(
     endpoint: string,
     orderId: string
   ): Observable<ActiveOrderItem> {

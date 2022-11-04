@@ -50,7 +50,12 @@
   </div>
   <ng-template #elseBlock>
     <div *ngIf="sidesmenu">
-      <button (click)="routeSwitchSide()" color="primary" mat-raised-button>
+      <button
+        routerLink="../menuadd"
+        (click)="routeSwitchSide()"
+        color="primary"
+        mat-raised-button
+      >
         Add Menu Item
       </button>
       <h1>Sides Menu</h1>

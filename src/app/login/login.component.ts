@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     password: this.builder.control<string>('', Validators.required),
   });
 
-  Getvalue() {
+  getValue() {
     console.log(this.loginForm.value.username);
     console.log(this.loginForm.valid);
   }

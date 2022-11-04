@@ -63,12 +63,12 @@ export class MenuaddComponent implements OnInit {
       option: this.builder.control<string>(''),
     });
 
-    this.addonoptions(i).push(addOnOptionForm);
+    this.addonOptions(i).push(addOnOptionForm);
 
     console.log('addons with options', this.addons.value);
   }
 
-  addonoptions(addonFormIndex: number): FormArray {
+  addonOptions(addonFormIndex: number): FormArray {
     return (this.addons.get(`${addonFormIndex}`) as FormGroup).controls[
       'addonoptions'
     ] as FormArray;

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getProfile() {
-    this.authService.GetProfile().subscribe((response) => {
+    this.authService.getProfile().subscribe((response) => {
       console.log('get profile response in ehader', response);
       this.profile = response;
     });

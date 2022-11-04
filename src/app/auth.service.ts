@@ -33,7 +33,7 @@ export class AuthService {
     );
   }
 
-  public GetProfile(): Observable<Profile> {
+  public getProfile(): Observable<Profile> {
     return this.http.get<Profile>(
       this.restUrl + '/getprofile',
 

@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService, private builder: FormBuilder) {}
 
-  GetProfile(): void {
-    this.authService.GetProfile().subscribe((result) => {
+  getProfile(): void {
+    this.authService.getProfile().subscribe((result) => {
       console.log('get profile result', result);
       this.profile = result;
       this.fetachedProfile$.next(this.profile);
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.GetProfile();
+    this.getProfile();
     this.imageForm = new FormGroup({
       name: new FormControl(null),
       image: new FormControl(null),

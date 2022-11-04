@@ -16,18 +16,18 @@ export class TableComponent implements OnInit {
     private pusherService: PusherService
   ) {}
 
-  GetOrders(): void {
-    this.orderService.GetActiveOrders().subscribe((result) => {
+  getOrders(): void {
+    this.orderService.getActiveOrders().subscribe((result) => {
       console.log('result on get active orders', result);
 
       this.dataSource = result;
     });
   }
 
-  AdjsutOrderStatus(orderId: string) {
+  adjsutOrderStatus(orderId: string) {
     console.log('order ID passed to table componenet', orderId);
     this.orderService
-      .AdjustOrderStatus('/rest-adj-order-status', orderId)
+      .adjustOrderStatus('/rest-adj-order-status', orderId)
       .subscribe((result) => {
         console.log('adjsuted order in table componenet', result);
       });
@@ -36,7 +36,7 @@ export class TableComponent implements OnInit {
   pusher() {
     let channel = this.pusherService.pusher.subscribe('rests');
     channel.bind('updated', (data: any) => {
-      this.GetOrders();
+      this.getOrders();
       alert('New Order!');
     });
 
@@ -47,6 +47,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.pusher();
-    this.GetOrders();
+    this.getOrders();
   }
 }
