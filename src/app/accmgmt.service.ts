@@ -23,10 +23,10 @@ export class AccmgmtService {
   createMenuItem(MenuItem: MenuItem): Observable<object> {
     const imageData = new FormData();
 
-    console.log('passed menue item', MenuItem);
+    console.log('passed menu item', MenuItem);
 
     imageData.append('imageName', MenuItem.image!.name!);
-    imageData.append('image', MenuItem.image!);
+    imageData.append('image', JSON.stringify(MenuItem.image!));
     imageData.append('name', MenuItem.name!);
     imageData.append('price', MenuItem.price!);
     imageData.append('description', MenuItem.description!);

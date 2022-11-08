@@ -2,138 +2,226 @@
   <!-- Main Form container -->
 
   <div [formGroup]="menuForm" class="categories-form">
-    <form (submit)="onSubmit()" action="" class="form-container">
-      <div>
-        <input type="text" placeholder="name" formControlName="name" />
-      </div>
+    <form type="form" (submit)="onSubmit()" action="" class="form-container">
+      <button id="submit-btn" mat-raised-button type="submit">
+        <span class="submit-btn-text"> Save Menu Item</span>
+      </button>
 
-      <div>
-        <input type="text" placeholder="price" formControlName="price" />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="description"
-          formControlName="description"
-        />
-      </div>
-      <div>
-        <input type="text" placeholder="item type" formControlName="itemType" />
-      </div>
-      <div>
-        <input (change)="onFileSelect($event)" type="file" />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="imageName"
-          formControlName="imageName"
-        />
-      </div>
+      <div class="array-container">
+        <div class="core-form">
+          <div class="image-input-container">
+            <div *ngIf="imageData">
+              <img class="item-image" [src]="imageData" />
+            </div>
 
-      <!-- Categories Array -->
+            <div class="image-container">
+              <label id="image-label" for="image">
+                <span class="image-add-text"> Add Item Image</span>
 
-      <ng-container type="form" formArrayName="categories">
-        <h4>Add Categories</h4>
-        <ng-container
-          *ngFor="let categoryForm of categories.controls; let i = index"
-        >
-          <div [formGroupName]="i" class="categories-form-row">
-            <mat-form-field appearance="fill">
+                <input
+                  id="file-input"
+                  (change)="onFileSelect($event)"
+                  type="file"
+                  id="image"
+                />
+              </label>
+            </div>
+          </div>
+          <div class="input-container">
+            <mat-form-field class="mat-field" appearance="fill">
               <input
                 matInput
-                placeholder="Category"
-                formControlName="category"
+                type="text"
+                placeholder="Name"
+                formControlName="name"
               />
             </mat-form-field>
-
-            <button type="button" (click)="deleteCategory(i)">
-              Delete Category
-            </button>
           </div>
-        </ng-container>
-      </ng-container>
-      <div>
-        <button type="button" (click)="addCategory()">Add Category</button>
-      </div>
 
-      <!-- Addons Array -->
-
-      <ng-container type="form" formArrayName="addons">
-        <h4>Add Addons</h4>
-        <ng-container *ngFor="let addOnForm of addons.controls; let x = index">
-          <div [formGroupName]="x" class="addons-form-row">
-            <mat-form-field appearance="fill">
-              <input matInput placeholder="Addon" formControlName="addonname" />
-            </mat-form-field>
-
-            <button type="button" (click)="deleteAddOn(x)">Delete Addon</button>
-            <button type="button" (click)="addAddonOption(x)">
-              add addon option
-            </button>
-
-            <ng-container formArrayName="addonoptions">
-              <ng-container
-                *ngFor="
-                  let addonoption of addonOptions(x).controls;
-                  let k = index
-                "
-              >
-                <div [formGroupName]="k" class="imbeded-addon-options">
-                  <mat-form-field appearance="fill">
-                    <input
-                      matInput
-                      type="text"
-                      placeholder="Add On Option"
-                      formControlName="option"
-                    />
-                  </mat-form-field>
-                </div> </ng-container
-            ></ng-container>
-          </div>
-        </ng-container>
-      </ng-container>
-      <div>
-        <button type="button" (click)="addAddon()">Add Addon</button>
-      </div>
-
-      <!--  related sides array  -->
-
-      <ng-container type="form" formArrayName="relatedsides">
-        <h4>Add Sides</h4>
-        <ng-container
-          *ngFor="let sideForm of relatedsides.controls; let j = index"
-        >
-          <div [formGroupName]="j" class="Sides-form-row">
-            <mat-form-field appearance="fill">
-              <input matInput placeholder="Name" formControlName="name" />
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-              <input matInput placeholder="Price" formControlName="price" />
-            </mat-form-field>
-            <mat-form-field appearance="fill">
+          <div>
+            <mat-form-field class="mat-field" appearance="fill">
               <input
                 matInput
+                type="text"
+                placeholder="Price"
+                formControlName="price"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="mat-field" appearance="fill">
+              <input
+                matInput
+                type="text"
                 placeholder="Description"
                 formControlName="description"
               />
             </mat-form-field>
-
-            <div>
-              <h3>Add Image</h3>
-              <input (change)="onFileSelectSide($event, j)" type="file" />
-            </div>
-
-            <button type="button" (click)="deleteSide(j)">Delete Side</button>
           </div>
-        </ng-container>
-      </ng-container>
-      <div>
-        <button type="button" (click)="addSide()">Add Side</button>
-      </div>
+          <div>
+            <mat-form-field class="mat-field" appearance="fill">
+              <input
+                matInput
+                type="text"
+                placeholder="Item Type"
+                formControlName="itemType"
+              />
+            </mat-form-field>
+          </div>
+        </div>
 
-      <button type="submit">Submit</button>
+        <!-- Categories Array -->
+
+        <div class="category-array">
+          <div>
+            <button mat-raised-button type="button" (click)="addCategory()">
+              New Category
+            </button>
+          </div>
+          <ng-container type="form" formArrayName="categories">
+            <ng-container
+              *ngFor="let categoryForm of categories.controls; let i = index"
+            >
+              <div [formGroupName]="i" class="categories-form-row">
+                <mat-form-field class="mat-field" appearance="fill">
+                  <input
+                    matInput
+                    placeholder="Category"
+                    formControlName="category"
+                  />
+                </mat-form-field>
+                <div>
+                  <button
+                    mat-raised-button
+                    type="button"
+                    (click)="deleteCategory(i)"
+                  >
+                    Delete Category
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <!-- Addons Array -->
+        <div class="addon-array">
+          <div>
+            <button mat-raised-button type="button" (click)="addAddon()">
+              New Addon
+            </button>
+          </div>
+          <ng-container type="form" formArrayName="addons">
+            <ng-container
+              *ngFor="let addOnForm of addons.controls; let x = index"
+            >
+              <div [formGroupName]="x" class="addons-form-row">
+                <mat-form-field class="mat-field" appearance="fill">
+                  <input
+                    matInput
+                    placeholder="Addon"
+                    formControlName="addonname"
+                  />
+                </mat-form-field>
+
+                <div>
+                  <button
+                    mat-raised-button
+                    type="button"
+                    (click)="addAddonOption(x)"
+                  >
+                    New addon option
+                  </button>
+                </div>
+
+                <ng-container formArrayName="addonoptions">
+                  <ng-container
+                    *ngFor="
+                      let addonoption of addonOptions(x).controls;
+                      let k = index
+                    "
+                  >
+                    <div [formGroupName]="k" class="imbeded-addon-options">
+                      <mat-form-field class="mat-field" appearance="fill">
+                        <input
+                          matInput
+                          type="text"
+                          placeholder="Add On Option"
+                          formControlName="option"
+                        />
+                      </mat-form-field>
+                    </div>
+
+                    <button
+                      mat-raised-button
+                      type="button"
+                      (click)="deleteAddOnOption(x, k)"
+                    >
+                      Delete addon Option
+                    </button>
+                  </ng-container>
+                  <div></div>
+                </ng-container>
+              </div>
+
+              <div>
+                <button
+                  mat-raised-button
+                  type="button"
+                  (click)="deleteAddOn(x)"
+                >
+                  Delete Addon
+                </button>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <!--  related sides array  -->
+
+        <div class="side-array">
+          <div>
+            <button mat-raised-button type="button" (click)="addSide()">
+              New Side
+            </button>
+          </div>
+          <ng-container
+            class="sides-container"
+            type="form"
+            formArrayName="relatedsides"
+          >
+            <ng-container
+              *ngFor="let sideForm of relatedsides.controls; let j = index"
+            >
+              <div [formGroupName]="j" class="Sides-form-row">
+                <mat-form-field appearance="fill">
+                  <input matInput placeholder="Name" formControlName="name" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <input matInput placeholder="Price" formControlName="price" />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <input
+                    matInput
+                    placeholder="Description"
+                    formControlName="description"
+                  />
+                </mat-form-field>
+
+                <div>
+                  <button
+                    mat-raised-button
+                    type="button"
+                    (click)="deleteSide(j)"
+                  >
+                    Delete Side
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
     </form>
   </div>
 </div>

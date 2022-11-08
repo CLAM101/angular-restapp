@@ -93,6 +93,14 @@ export class MenuaddComponent implements OnInit {
   deleteAddOn(addOnIndex: number) {
     this.addons.removeAt(addOnIndex);
   }
+
+  deleteAddOnOption(addOnIndex: number, addOnOptionIndex: number) {
+    const addOnOption = (this.addons.get(`${addOnIndex}`) as FormGroup)
+      .controls['addonoptions'] as FormArray;
+
+    addOnOption.removeAt(addOnOptionIndex);
+  }
+
   deleteSide(sideIndex: number) {
     this.relatedsides.removeAt(sideIndex);
   }
@@ -105,6 +113,7 @@ export class MenuaddComponent implements OnInit {
       image: file,
       imageName: (event.target as HTMLInputElement).files![0].name,
     });
+
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
@@ -189,6 +198,8 @@ export class MenuaddComponent implements OnInit {
     };
 
     this.createMenuItem(menuItem);
+
+    this.menuForm.reset();
   }
 
   // addImage(name: string, image: File) {

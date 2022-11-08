@@ -1,6 +1,39 @@
+//elements
+
+input {
+    padding-top: 1%;
+    margin-top: 1%;
+    
+    
+}
+label {
+    cursor:pointer;
+}
+input::file-selector-button {
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 8%;
+}
+button {
+    background-color: black;
+    color: #31C6D4;
+    font-size: 1.2em;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: bold;
+   // margin-top: 1%;
+  //  margin-bottom: 1%;
+
+}
+
+// classes
 .container {
     text-align: center;
-    justify-content: center
+    justify-content: center;
+    background-color: #31C6D4;
+    height: 90%;
+    overflow: scroll;
 }
 
 .text-input-container {
@@ -13,14 +46,86 @@
 .categories-form{
     text-align: center;
     justify-content: center;
+    background-color: #31C6D4;
     
 }
 .form-container {
-text-align: center;
-justify-content: center;
-padding-top: 5%;
+
+
+//padding-top: 1%;
+
+
 }
-input {
-    padding-top: 1%;
-    margin-top: 1%;
+.image-add-text {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.mat-field {
+
+  width: 100%;
+    text-align: center;
+    
+    ::placeholder {
+        color: black ;
+        font-size: 1.2em;
+        font-weight: bold;
+      };
+      
+}
+
+.submit-btn-text{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.item-image{
+    height: 50%;
+    width: 50%;
+
+}
+
+
+.core-form {
+
+    
+    
+}
+
+.addon-array{
+
+
+}
+.sides-container{
+
+    
+
+}
+.array-container{
+    grid: 150px / auto auto auto auto;
+    display: grid;
+}
+
+.image-input-container {
+    text-align: center;
+    justify-content: center;
+}
+
+   
+    
+// IDs
+
+
+#submit-btn {
+    margin: 0.2%
+
+}
+#image {
+    display: none;
+}
+#image-label {
+    height: 100%;
+    width: 100%;
+}
+#file-input {
+ 
 }

@@ -57,6 +57,24 @@ export interface MenuItem {
   itemType?: string;
 }
 
+export interface FetchedMenuItem {
+  name?: string;
+  price?: string;
+  description?: string;
+  categories?: Array<string>;
+  rating?: number;
+  restaurantname?: string;
+  image?: {
+    name?: string;
+    imagePath?: string;
+  };
+  imageName?: string;
+
+  relatedsides?: Array<SideItem>;
+  addons?: Array<object>;
+  itemType?: string;
+}
+
 export interface Menu {
   sidesmenu: Array<SideItem>;
   menu: Array<MenuItem>;

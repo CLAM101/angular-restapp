@@ -6,7 +6,7 @@ import { routeSwitchMain } from '../state.actions';
 import { routeSwitchSide } from '../state.actions';
 import { Observable, of } from 'rxjs';
 import { SideItem } from '../interfaces';
-import { MenuItem } from '../interfaces';
+import { FetchedMenuItem } from '../interfaces';
 
 @Component({
   selector: 'app-menu',
@@ -25,12 +25,12 @@ export class MenuComponent implements OnInit {
     this.route$ = store.select('route');
   }
 
-  menuItems!: MenuItem[];
+  menuItems!: FetchedMenuItem[];
   sidesmenu!: SideItem[];
   itemTypes!: [
     {
       type: string;
-      items: [MenuItem];
+      items: [FetchedMenuItem];
     }
   ];
   items!: [string];
@@ -51,6 +51,8 @@ export class MenuComponent implements OnInit {
       this.itemTypes = menu.menuByItemType;
       this.items = menu.itemTypes;
       this.sidesmenu = menu.sidesmenu;
+
+      console.log('set item types', this.itemTypes);
     });
   }
 

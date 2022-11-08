@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   imageData!: string | null;
 
   profile: Profile = {};
-  private fetachedProfile$ = new Subject<Profile>();
+  private fetchedProfile$ = new Subject<Profile>();
   private profileSubscription!: Subscription;
 
   constructor(private authService: AuthService, private builder: FormBuilder) {}
@@ -29,13 +29,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.authService.getProfile().subscribe((result) => {
       console.log('get profile result', result);
       this.profile = result;
-      this.fetachedProfile$.next(this.profile);
+      this.fetchedProfile$.next(this.profile);
       console.log('result on get profile', this.profile);
     });
   }
 
   getProfileStream() {
-    return this.fetachedProfile$.asObservable();
+    return this.fetchedProfile$.asObservable();
   }
 
   addImage(name: string, image: File) {
