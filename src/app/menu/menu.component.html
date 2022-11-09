@@ -24,20 +24,18 @@
             <mat-card class="list-item">
               <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{
-                  itemTypes[i].items[x].name
-                }}</mat-card-title>
+                <mat-card-title>{{ itemType.name }}</mat-card-title>
                 <mat-card-subtitle>
-                  Price:{{ itemTypes[i].items[x].price }}</mat-card-subtitle
+                  Price:{{ itemType.price }}</mat-card-subtitle
                 >
               </mat-card-header>
               <img
                 mat-card-image
-                [src]="itemTypes[i].items[x].image?.imagePath"
-                [alt]="itemTypes[i].items[x].image?.name"
+                [src]="itemType.image?.imagePath"
+                [alt]="itemType.image?.name"
               />
               <mat-card-content>
-                <p>Description: {{ itemTypes[i].items[x].description }}</p>
+                <p>Description: {{ itemType.description }}</p>
               </mat-card-content>
               <mat-card-actions>
                 <button mat-button>Edit</button>

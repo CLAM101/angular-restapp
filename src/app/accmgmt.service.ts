@@ -23,7 +23,7 @@ export class AccmgmtService {
   createMenuItem(MenuItem: MenuItem): Observable<object> {
     const imageData = new FormData();
 
-    console.log('passed menu item', MenuItem);
+    console.log('passed menu item addons in acc mgmt service', MenuItem.addons);
 
     imageData.append('imageName', MenuItem.image!.name!);
     imageData.append('image', JSON.stringify(MenuItem.image!));
@@ -43,6 +43,12 @@ export class AccmgmtService {
     );
 
     return this.http.post<MenuItem>(this.restUrl + '/addmenuitem', imageData, {
+      withCredentials: true,
+    });
+  }
+
+  getRest(): Observable<object> {
+    return this.http.get<object>(this.restUrl + '/getone', {
       withCredentials: true,
     });
   }

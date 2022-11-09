@@ -19,6 +19,7 @@ import { MenuItem } from '../interfaces';
 export class MenuaddComponent implements OnInit {
   menuForm!: FormGroup;
   imageData!: string | null;
+  rest!: object;
   // categories!: FormArray;
 
   constructor(
@@ -37,6 +38,13 @@ export class MenuaddComponent implements OnInit {
 
   get relatedsides() {
     return this.menuForm.controls['relatedsides'] as FormArray;
+  }
+
+  getRest(): void {
+    this.accmgmtService.getRest().subscribe((rest) => {
+      console.log('get rest result', rest);
+      this.rest = rest;
+    });
   }
 
   addCategory() {
@@ -199,7 +207,7 @@ export class MenuaddComponent implements OnInit {
 
     this.createMenuItem(menuItem);
 
-    this.menuForm.reset();
+    // this.menuForm.reset();
   }
 
   // addImage(name: string, image: File) {
@@ -217,6 +225,7 @@ export class MenuaddComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+    this.getRest();
     this.menuForm = this.builder.group({
       name: this.builder.control<string>('', Validators.required),
       price: this.builder.control<string>('', Validators.required),

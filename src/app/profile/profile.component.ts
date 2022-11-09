@@ -15,13 +15,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
   imageForm!: FormGroup;
   imageData!: string | null;
 
   profile: Profile = {};
-  private fetchedProfile$ = new Subject<Profile>();
-  private profileSubscription!: Subscription;
 
   constructor(private authService: AuthService, private builder: FormBuilder) {}
 
@@ -29,13 +27,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.authService.getProfile().subscribe((result) => {
       console.log('get profile result', result);
       this.profile = result;
-      this.fetchedProfile$.next(this.profile);
+
       console.log('result on get profile', this.profile);
     });
-  }
-
-  getProfileStream() {
-    return this.fetchedProfile$.asObservable();
   }
 
   addImage(name: string, image: File) {
@@ -79,16 +73,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
       name: new FormControl(null),
       image: new FormControl(null),
     });
-
-    this.profileSubscription = this.getProfileStream().subscribe((profile) => {
-      console.log('profile in ng on init sub', profile);
-      this.profile = profile;
-    });
-
-    console.log('profile subscription', this.profileSubscription);
-  }
-
-  ngOnDestroy(): void {
-    this.profileSubscription.unsubscribe();
   }
 }

@@ -1,10 +1,7 @@
 //elements
-
 input {
     padding-top: 1%;
     margin-top: 1%;
-    
-    
 }
 label {
     cursor:pointer;
@@ -22,9 +19,6 @@ button {
     border-radius: 15px;
     width: 100%;
     font-weight: bold;
-   // margin-top: 1%;
-  //  margin-bottom: 1%;
-
 }
 
 // classes
@@ -35,45 +29,31 @@ button {
     height: 90%;
     overflow: scroll;
 }
-
 .text-input-container {
     text-align: center;
     justify-content: center;
     align-items: center;
     
 }
-
 .categories-form{
     text-align: center;
     justify-content: center;
     background-color: #31C6D4;
     
 }
-.form-container {
-
-
-//padding-top: 1%;
-
-
-}
 .image-add-text {
     font-weight: bold;
     font-size: 1.2em;
 }
-
 .mat-field {
-
   width: 100%;
     text-align: center;
-    
     ::placeholder {
         color: black ;
         font-size: 1.2em;
         font-weight: bold;
-      };
-      
+      };   
 }
-
 .submit-btn-text{
     font-size: 1.2em;
     font-weight: bold;
@@ -81,40 +61,18 @@ button {
 .item-image{
     height: 50%;
     width: 50%;
-
 }
 
-
-.core-form {
-
-    
-    
-}
-
-.addon-array{
-
-
-}
-.sides-container{
-
-    
-
-}
 .array-container{
     grid: 150px / auto auto auto auto;
     display: grid;
 }
-
 .image-input-container {
     text-align: center;
     justify-content: center;
 }
 
-   
-    
-// IDs
-
-
+// Ids
 #submit-btn {
     margin: 0.2%
 
@@ -126,6 +84,4 @@ button {
     height: 100%;
     width: 100%;
 }
-#file-input {
- 
-}
+
