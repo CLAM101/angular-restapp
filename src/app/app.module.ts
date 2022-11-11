@@ -29,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     StoreModule.forRoot({ route: routeSwitchReducer }),
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

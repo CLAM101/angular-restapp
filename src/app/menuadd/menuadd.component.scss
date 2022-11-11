@@ -71,6 +71,16 @@ button {
     text-align: center;
     justify-content: center;
 }
+.list-item {
+    list-style: none
+}
+
+.list-item:hover{
+
+    background-color: grey;
+    color: white;
+  }
+
 
 // Ids
 #submit-btn {

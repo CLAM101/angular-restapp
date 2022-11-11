@@ -67,6 +67,18 @@
                 formControlName="itemType"
               />
             </mat-form-field>
+            <div *ngIf="!typeIsHidden" class="category-dropdown">
+              <li
+                class="list-item"
+                *ngFor="let type of rest.itemtypes; let l; as: index"
+                (click)="selectItemType(l)"
+              >
+                {{ type }}
+              </li>
+            </div>
+            <button mat-raised-button type="button" (click)="showItemType()">
+              Choose existing
+            </button>
           </div>
         </div>
 
@@ -85,11 +97,24 @@
               <div [formGroupName]="i" class="categories-form-row">
                 <mat-form-field class="mat-field" appearance="fill">
                   <input
+                    type="text"
                     matInput
                     placeholder="Category"
                     formControlName="category"
                   />
                 </mat-form-field>
+                <div *ngIf="!catIsHidden[i]" class="category-dropdown">
+                  <li
+                    class="list-item"
+                    *ngFor="let category of fetchedcategories; let y; as: index"
+                    (click)="selectCat(i, y)"
+                  >
+                    {{ category }}
+                  </li>
+                </div>
+                <button mat-raised-button type="button" (click)="showList(i)">
+                  Choose existing
+                </button>
                 <div>
                   <button
                     mat-raised-button
@@ -122,7 +147,22 @@
                     formControlName="addonname"
                   />
                 </mat-form-field>
-
+                <div *ngIf="!addIsHidden[x]" class="category-dropdown">
+                  <li
+                    class="list-item"
+                    *ngFor="let addon of rest.addonmenu; let j; as: index"
+                    (click)="selectAddon(x, j)"
+                  >
+                    {{ addon.addonname }}
+                  </li>
+                </div>
+                <button
+                  mat-raised-button
+                  type="button"
+                  (click)="showAddList(x)"
+                >
+                  Choose existing
+                </button>
                 <div>
                   <button
                     mat-raised-button
@@ -150,6 +190,29 @@
                         />
                       </mat-form-field>
                     </div>
+                    <div
+                      *ngIf="!addOptionIsHidden[k]"
+                      class="category-dropdown"
+                    >
+                      <li
+                        class="list-item"
+                        *ngFor="
+                          let addonoption of rest.addonmenu![x].addonoptions!;
+                          let j;
+                          as: index
+                        "
+                        (click)="selectAddonOption(k, j, x)"
+                      >
+                        {{ addonoption.option }}
+                      </li>
+                    </div>
+                    <button
+                      mat-raised-button
+                      type="button"
+                      (click)="showAddOptionList(k)"
+                    >
+                      Choose existing
+                    </button>
 
                     <button
                       mat-raised-button
@@ -207,7 +270,18 @@
                     formControlName="description"
                   />
                 </mat-form-field>
-
+                <div *ngIf="!sideIsHidden[j]" class="category-dropdown">
+                  <li
+                    class="list-item"
+                    *ngFor="let side of rest.sidesmenu; let l; as: index"
+                    (click)="selectSide(j, l)"
+                  >
+                    {{ side.name }}
+                  </li>
+                </div>
+                <button mat-raised-button type="button" (click)="showSide(j)">
+                  Choose existing
+                </button>
                 <div>
                   <button
                     mat-raised-button
@@ -224,4 +298,17 @@
       </div>
     </form>
   </div>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Addons</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let addon of rest.addonmenu"
+        [value]="addon.addonname"
+      >
+        {{ addon.addonname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div> -->
 </div>

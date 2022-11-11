@@ -92,3 +92,19 @@ export interface Route {
   main?: string;
   side?: string;
 }
+
+export interface Rest {
+  addonmenu?: Array<{
+    addonname?: string;
+    addonoptions?: [{ option: string }];
+  }>;
+  categories?: [string];
+  sidesmenu?: [
+    {
+      name: string;
+      price: number;
+      description: string;
+    }
+  ];
+  itemtypes?: [string];
+}

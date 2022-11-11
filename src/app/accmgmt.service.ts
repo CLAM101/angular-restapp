@@ -48,7 +48,7 @@ export class AccmgmtService {
   }
 
   getRest(): Observable<object> {
-    return this.http.get<object>(this.restUrl + '/getone', {
+    return this.http.get<object>(this.restUrl + '/getrestdetail', {
       withCredentials: true,
     });
   }
