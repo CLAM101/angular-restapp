@@ -52,7 +52,12 @@ export class MenuComponent implements OnInit {
       this.items = menu.itemTypes;
       this.sidesmenu = menu.sidesmenu;
 
-      console.log('set item types', this.itemTypes);
+      console.log(
+        'set item types',
+        this.itemTypes,
+        'sides menu',
+        this.sidesmenu
+      );
     });
   }
 

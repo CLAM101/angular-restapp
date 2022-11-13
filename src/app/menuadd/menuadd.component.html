@@ -106,7 +106,7 @@
                 <div *ngIf="!catIsHidden[i]" class="category-dropdown">
                   <li
                     class="list-item"
-                    *ngFor="let category of fetchedcategories; let y; as: index"
+                    *ngFor="let category of rest.categories; let y; as: index"
                     (click)="selectCat(i, y)"
                   >
                     {{ category }}
@@ -197,16 +197,17 @@
                       <li
                         class="list-item"
                         *ngFor="
-                          let addonoption of rest.addonmenu![x].addonoptions!;
-                          let j;
+                          let addonoption of addOnOptionList(x);
+                          let value;
                           as: index
                         "
-                        (click)="selectAddonOption(k, j, x)"
+                        (click)="selectAddonOption(k, value, x)"
                       >
                         {{ addonoption.option }}
                       </li>
                     </div>
                     <button
+                      *ngIf="addonoption"
                       mat-raised-button
                       type="button"
                       (click)="showAddOptionList(k)"
@@ -279,6 +280,24 @@
                     {{ side.name }}
                   </li>
                 </div>
+                <div class="bottom-image-input-container">
+                  <div *ngIf="sideImageData[j]">
+                    <img class="item-image" [src]="sideImageData[j]" />
+                  </div>
+
+                  <div class="image-container">
+                    <label id="bottom-image-label" for="bottom-image">
+                      <span class="image-add-text"> Add Item Image</span>
+
+                      <input
+                        id="side-file-input"
+                        (change)="onFileSelectSide($event, j)"
+                        type="file"
+                        id="bottom-image"
+                      />
+                    </label>
+                  </div>
+                </div>
                 <button mat-raised-button type="button" (click)="showSide(j)">
                   Choose existing
                 </button>
@@ -298,17 +317,4 @@
       </div>
     </form>
   </div>
-
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Addons</mat-label>
-    <mat-select>
-      <mat-option
-        *ngFor="let addon of rest.addonmenu"
-        [value]="addon.addonname"
-      >
-        {{ addon.addonname }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div> -->
 </div>

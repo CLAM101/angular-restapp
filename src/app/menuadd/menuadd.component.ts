@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AccmgmtService } from '../accmgmt.service';
-import { Observable, of } from 'rxjs';
 import {
   FormControl,
   FormGroup,
@@ -20,7 +19,8 @@ export class MenuaddComponent implements OnInit {
   menuForm!: FormGroup;
   imageData!: string | null;
   rest!: Rest;
-  fetchedcategories!: [string];
+  files: Array<any> = [];
+  sideImageData: Array<any> = [];
 
   // hide show controls for each dropdown
   catIsHidden: [boolean] = [true];
@@ -50,67 +50,36 @@ export class MenuaddComponent implements OnInit {
     return this.menuForm.controls['relatedsides'] as FormArray;
   }
 
-  //method for fetching logged in restaurant detail
+  //fetches logged in restaurant detail
   getRest(): void {
     this.accmgmtService.getRest().subscribe((rest: Rest) => {
-      console.log('get rest result', rest.addonmenu![0]);
       this.rest = rest;
-      this.rest.addonmenu = rest.addonmenu;
-      this.fetchedcategories = rest.categories!;
-      this.rest.sidesmenu = rest.sidesmenu;
-      this.rest.itemtypes = rest.itemtypes;
-
-      console.log(rest.categories);
     });
   }
 
   //shows or hides the categories list
   showList(i: number) {
-    if (this.catIsHidden[i]) {
-      this.catIsHidden[i] = false;
-    } else {
-      this.catIsHidden[i] = true;
-    }
+    this.catIsHidden[i] = !this.catIsHidden[i];
   }
 
   // shows or hides addons list
   showAddList(x: number) {
-    if (this.addIsHidden[x]) {
-      this.addIsHidden[x] = false;
-    } else {
-      this.addIsHidden[x] = true;
-    }
+    this.addIsHidden[x] = !this.addIsHidden[x];
   }
 
   // shows or hides addon options list
   showAddOptionList(k: number) {
-    console.log('show addon option list index', k);
-    if (this.addOptionIsHidden[k]) {
-      this.addOptionIsHidden[k] = false;
-      console.log('addon is hidden on show false', this.addOptionIsHidden[k]);
-    } else {
-      this.addOptionIsHidden[k] = true;
-      console.log('addon is hidden on show true', this.addOptionIsHidden[k]);
-    }
+    this.addOptionIsHidden[k] = !this.addOptionIsHidden[k];
   }
 
   // shows or hides side options list
   showSide(j: number) {
-    console.log('side index in show side', j);
-    if (this.sideIsHidden[j]) {
-      this.sideIsHidden[j] = false;
-    } else {
-      this.sideIsHidden[j] = true;
-    }
+    this.sideIsHidden[j] = !this.sideIsHidden[j];
   }
 
   // shows or hides type options list
   showItemType() {
-    if (this.sideIsHidden) {
-      this.typeIsHidden = false;
-    } else {
-      this.typeIsHidden = true;
-    }
+    this.typeIsHidden = !this.typeIsHidden;
   }
 
   //assigns selected category from dropdown to relevant form field
@@ -136,7 +105,6 @@ export class MenuaddComponent implements OnInit {
     });
 
     this.addIsHidden[x] = true;
-    console.log('menuform value on addon select', j);
   }
 
   // assigns selected addon option from dropdown to relevant form field
@@ -163,15 +131,13 @@ export class MenuaddComponent implements OnInit {
       price: l.price,
       description: l.description,
     });
-
-    console.log('j', j, 'l', l, 'sides', sides);
   }
 
   // assigns selected type from dropdown to relevant form field
   selectItemType(l: any) {
     const type = this.menuForm.get('itemType') as FormControl;
-
     type.setValue(l);
+    this.typeIsHidden = true;
   }
 
   // adds a category
@@ -224,6 +190,21 @@ export class MenuaddComponent implements OnInit {
     this.relatedsides.push(sideForm);
   }
 
+  //returns the array of addonoptions relevant to the chosen add on name
+  addOnOptionList(x: number) {
+    let options = this.addons.get(`${x}`) as FormArray;
+    let relevantArray;
+
+    this.rest.addonmenu?.filter((i) => {
+      if (i.addonname === options.value.addonname) {
+        relevantArray = i.addonoptions;
+      }
+    });
+    ``;
+
+    return relevantArray;
+  }
+
   // deletes category from form
   deleteCategory(categoryIndex: number) {
     this.categories.removeAt(categoryIndex);
@@ -249,11 +230,13 @@ export class MenuaddComponent implements OnInit {
 
   // adds selected image to form
   onFileSelect(event: Event) {
-    console.log('file selected', (event.target as HTMLInputElement).files![0]);
     const file = (event.target as HTMLInputElement).files![0];
 
+    const imageArray = this.menuForm.get('image') as FormArray;
+
+    this.files.push(file);
+
     this.menuForm.patchValue({
-      image: file,
       imageName: (event.target as HTMLInputElement).files![0].name,
     });
 
@@ -269,27 +252,24 @@ export class MenuaddComponent implements OnInit {
 
   // ads selected image to sides field of form
   onFileSelectSide(event: Event, i: number) {
-    console.log('file selected', (event.target as HTMLInputElement).files![0]);
     const file = (event.target as HTMLInputElement).files![0];
-    console.log('on file select side index', i);
-    console.log('related sides before change', this.relatedsides.value[i]);
 
-    this.relatedsides.value[i].image = file;
-    this.relatedsides.value[i].imageName = (
-      event.target as HTMLInputElement
-    ).files![0].name;
+    this.files.push(file);
+
+    let relevantSide = this.relatedsides.get(`${i}`) as FormControl;
+
+    relevantSide.patchValue({
+      imageName: (event.target as HTMLInputElement).files![0].name,
+    });
 
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.imageData = reader.result as string;
+        this.sideImageData.push(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
-
-    console.log('related sides afetr change', this.relatedsides.value[i]);
-    console.log('menu form on file select', this.menuForm);
   }
 
   // calls service to create new menu item in db
@@ -323,7 +303,11 @@ export class MenuaddComponent implements OnInit {
 
   // submits full form
   onSubmit() {
-    console.log('form value on submit', this.menuForm.value);
+    // patches all selected images as array to image form field
+    this.menuForm.patchValue({
+      image: this.files,
+    });
+
     const menuItem: object = {
       name: this.menuForm.value.name!,
       price: this.menuForm.value.price!,
@@ -338,7 +322,7 @@ export class MenuaddComponent implements OnInit {
 
     this.createMenuItem(menuItem);
 
-    // this.menuForm.reset();
+    this.menuForm.reset();
   }
 
   ngOnInit(): void {
@@ -351,7 +335,7 @@ export class MenuaddComponent implements OnInit {
       price: this.builder.control<string>('', Validators.required),
       description: this.builder.control<string>('', Validators.required),
       itemType: this.builder.control<string>('', Validators.required),
-      image: this.builder.control<NonNullable<any>>('', Validators.required),
+      image: this.builder.control<NonNullable<any>>([], Validators.required),
       imageName: this.builder.control<string>('', Validators.required),
       categories: this.builder.array([]),
       relatedsides: this.builder.array([]),

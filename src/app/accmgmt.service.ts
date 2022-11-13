@@ -21,28 +21,31 @@ export class AccmgmtService {
   constructor(private http: HttpClient) {}
 
   createMenuItem(MenuItem: MenuItem): Observable<object> {
-    const imageData = new FormData();
+    const formData = new FormData();
 
-    console.log('passed menu item addons in acc mgmt service', MenuItem.addons);
+    console.log('passed menu item addons in acc mgmt service', MenuItem.image);
 
-    imageData.append('imageName', MenuItem.image!.name!);
-    imageData.append('image', JSON.stringify(MenuItem.image!));
-    imageData.append('name', MenuItem.name!);
-    imageData.append('price', MenuItem.price!);
-    imageData.append('description', MenuItem.description!);
-    imageData.append('categories', JSON.stringify(MenuItem.categories!));
-    imageData.append('relatedSides', JSON.stringify(MenuItem.relatedsides!));
-    imageData.append('addons', JSON.stringify(MenuItem.addons!));
-    imageData.append('itemType', MenuItem.itemType!);
+    for (let img of MenuItem.image!) {
+      formData.append('image', img);
+    }
+
+    formData.append('imageName', MenuItem.imageName!);
+    formData.append('name', MenuItem.name!);
+    formData.append('price', MenuItem.price!);
+    formData.append('description', MenuItem.description!);
+    formData.append('categories', JSON.stringify(MenuItem.categories!));
+    formData.append('relatedSides', JSON.stringify(MenuItem.relatedsides!));
+    formData.append('addons', JSON.stringify(MenuItem.addons!));
+    formData.append('itemType', MenuItem.itemType!);
     console.log(
       'image nam and data in service',
-      MenuItem.image!.name,
+      // MenuItem.image!.name,
       MenuItem.image,
       'image data',
-      imageData
+      formData
     );
 
-    return this.http.post<MenuItem>(this.restUrl + '/addmenuitem', imageData, {
+    return this.http.post<MenuItem>(this.restUrl + '/addmenuitem', formData, {
       withCredentials: true,
     });
   }

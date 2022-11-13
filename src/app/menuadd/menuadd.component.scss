@@ -71,6 +71,11 @@ button {
     text-align: center;
     justify-content: center;
 }
+.bottom-image-input-container {
+    text-align: center;
+    justify-content: center;
+}
+
 .list-item {
     list-style: none
 }
@@ -93,5 +98,12 @@ button {
 #image-label {
     height: 100%;
     width: 100%;
+}
+#bottom-image-label{
+    height: 100%;
+    width: 100%;
+}
+#bottom-image {
+    display: none;
 }
 

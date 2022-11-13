@@ -39,7 +39,7 @@ export interface SideItem {
   name?: string;
   price?: number;
   description?: string;
-  image?: File;
+  imagePath?: string;
   imageName?: string;
 }
 
@@ -50,7 +50,7 @@ export interface MenuItem {
   categories?: Array<string>;
   rating?: number;
   restaurantname?: string;
-  image?: File;
+  image?: [File];
   imageName?: string;
   relatedsides?: Array<SideItem>;
   addons?: Array<object>;
@@ -81,7 +81,7 @@ export interface Menu {
   menuByItemType: [
     {
       type: string;
-      items: [MenuItem];
+      items: [FetchedMenuItem];
     }
   ];
   itemTypes: [string];
