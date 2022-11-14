@@ -82,9 +82,12 @@ button {
 
 .list-item:hover{
 
-    background-color: grey;
+    background-color: black;
     color: white;
   }
+  .side-image {
+    display: none;
+}
 
 
 // Ids
@@ -103,7 +106,5 @@ button {
     height: 100%;
     width: 100%;
 }
-#bottom-image {
-    display: none;
-}
+
 

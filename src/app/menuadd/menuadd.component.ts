@@ -74,6 +74,7 @@ export class MenuaddComponent implements OnInit {
 
   // shows or hides side options list
   showSide(j: number) {
+    console.log('show side index', j);
     this.sideIsHidden[j] = !this.sideIsHidden[j];
   }
 
@@ -99,6 +100,16 @@ export class MenuaddComponent implements OnInit {
     let addons = (this.menuForm.get('addons') as FormArray).controls[
       x
     ] as FormControl;
+
+    let relatedOptions = j.addonoptions;
+
+    relatedOptions.forEach((option: { option: string }) => {
+      const addOnOptionForm = this.builder.group({
+        option: this.builder.control<string>(option.option),
+      });
+
+      this.addonOptions(x).push(addOnOptionForm);
+    });
 
     addons.patchValue({
       addonname: j.addonname,
@@ -126,10 +137,13 @@ export class MenuaddComponent implements OnInit {
   selectSide(j: number, l: any) {
     const sides = this.relatedsides.get(`${j}`) as FormControl;
 
+    console.log('value on selected side', l);
+
     sides.patchValue({
       name: l.name,
       price: l.price,
       description: l.description,
+      imagePath: l.imagePath,
     });
   }
 
@@ -177,6 +191,8 @@ export class MenuaddComponent implements OnInit {
     ] as FormArray;
   }
 
+  // let sideValue = relevantSide.value.imageName
+
   //ads a side to form
   addSide() {
     const sideForm = this.builder.group({
@@ -185,6 +201,7 @@ export class MenuaddComponent implements OnInit {
       description: ['', Validators.required],
       image: this.builder.control<NonNullable<any>>('', Validators.required),
       imageName: this.builder.control<string>('', Validators.required),
+      imagePath: this.builder.control<string>('', Validators.required),
     });
 
     this.relatedsides.push(sideForm);
@@ -203,6 +220,33 @@ export class MenuaddComponent implements OnInit {
     ``;
 
     return relevantArray;
+  }
+
+  // provides the correct side item image to be displayed based on image in menuform values
+  sideItemImage(j: number) {
+    let relevantSide = this.relatedsides.get(`${j}`) as FormControl;
+
+    let imageValue = relevantSide.value.imagePath;
+
+    let imageName = relevantSide.value.imageName;
+
+    if (!imageValue) {
+      let sideImageData = this.sideImageData;
+
+      let correctImage;
+
+      sideImageData.filter((item) => {
+        if (item.imageName === imageName) {
+          correctImage = item.image;
+        }
+      });
+
+      return correctImage;
+    } else if (!imageValue && !imageName) {
+      return false;
+    } else {
+      return imageValue;
+    }
   }
 
   // deletes category from form
@@ -232,8 +276,6 @@ export class MenuaddComponent implements OnInit {
   onFileSelect(event: Event) {
     const file = (event.target as HTMLInputElement).files![0];
 
-    const imageArray = this.menuForm.get('image') as FormArray;
-
     this.files.push(file);
 
     this.menuForm.patchValue({
@@ -256,17 +298,19 @@ export class MenuaddComponent implements OnInit {
 
     this.files.push(file);
 
-    let relevantSide = this.relatedsides.get(`${i}`) as FormControl;
-
-    relevantSide.patchValue({
+    (this.relatedsides.get(`${i}`) as FormControl).patchValue({
       imageName: (event.target as HTMLInputElement).files![0].name,
+      imagePath: '',
     });
 
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.sideImageData.push(reader.result as string);
+        this.sideImageData.push({
+          image: reader.result as string,
+          imageName: (event.target as HTMLInputElement).files![0].name,
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -322,7 +366,7 @@ export class MenuaddComponent implements OnInit {
 
     this.createMenuItem(menuItem);
 
-    this.menuForm.reset();
+    // this.menuForm.reset();
   }
 
   ngOnInit(): void {

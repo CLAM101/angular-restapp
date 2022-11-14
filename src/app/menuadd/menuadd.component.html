@@ -128,7 +128,9 @@
             </ng-container>
           </ng-container>
         </div>
+
         <!-- Addons Array -->
+
         <div class="addon-array">
           <div>
             <button mat-raised-button type="button" (click)="addAddon()">
@@ -281,19 +283,19 @@
                   </li>
                 </div>
                 <div class="bottom-image-input-container">
-                  <div *ngIf="sideImageData[j]">
-                    <img class="item-image" [src]="sideImageData[j]" />
+                  <div *ngIf="sideItemImage(j)">
+                    <img class="item-image" [src]="sideItemImage(j)" />
                   </div>
 
                   <div class="image-container">
-                    <label id="bottom-image-label" for="bottom-image">
+                    <label id="bottom-image-label">
                       <span class="image-add-text"> Add Item Image</span>
 
                       <input
+                        class="side-image"
                         id="side-file-input"
                         (change)="onFileSelectSide($event, j)"
                         type="file"
-                        id="bottom-image"
                       />
                     </label>
                   </div>
