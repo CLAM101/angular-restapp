@@ -273,15 +273,7 @@
                     formControlName="description"
                   />
                 </mat-form-field>
-                <div *ngIf="!sideIsHidden[j]" class="category-dropdown">
-                  <li
-                    class="list-item"
-                    *ngFor="let side of rest.sidesmenu; let l; as: index"
-                    (click)="selectSide(j, l)"
-                  >
-                    {{ side.name }}
-                  </li>
-                </div>
+
                 <div class="bottom-image-input-container">
                   <div *ngIf="sideItemImage(j)">
                     <img class="item-image" [src]="sideItemImage(j)" />
@@ -298,6 +290,15 @@
                         type="file"
                       />
                     </label>
+                  </div>
+                  <div *ngIf="!sideIsHidden[j]" class="category-dropdown">
+                    <li
+                      class="list-item"
+                      *ngFor="let side of rest.sidesmenu; let l; as: index"
+                      (click)="selectSide(j, l)"
+                    >
+                      {{ side.name }}
+                    </li>
                   </div>
                 </div>
                 <button mat-raised-button type="button" (click)="showSide(j)">

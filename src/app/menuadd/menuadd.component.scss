@@ -28,7 +28,42 @@ button {
     background-color: #31C6D4;
     height: 90%;
     overflow: scroll;
+    
 }
+.categories-form {
+    text-align: center;
+}
+.core-form {
+    width: 30em;
+    height: 15em;
+    text-align: center;
+    margin: 0.4em;
+}
+
+.category-array{
+    width: 30em;
+    height: 15em;
+    text-align: center;
+    margin: 0.4em;
+}
+
+.addon-array {
+    width: 30em;
+    height: 15em;
+    text-align: center;
+    margin: 0.4em;
+}
+.side-array {
+    width: 30em;
+    height: 15em;
+    text-align: center;
+    margin: 0.4em;
+}
+.array-container{
+    width: 30em;
+    height: 15em;
+}
+
 .text-input-container {
     text-align: center;
     justify-content: center;
@@ -59,8 +94,9 @@ button {
     font-weight: bold;
 }
 .item-image{
-    height: 50%;
-    width: 50%;
+    height: 20em;
+    width: 20em;
+    border-radius: 20%;
 }
 
 .array-container{

@@ -108,3 +108,10 @@ export interface Rest {
   ];
   itemtypes?: [string];
 }
+
+export interface ResponseObject {
+  status?: number;
+  rest?: object;
+  message?: string;
+  error?: object;
+}

@@ -8,7 +8,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { MenuItem, Rest } from '../interfaces';
+import { MenuItem, Rest, ResponseObject } from '../interfaces';
 
 @Component({
   selector: 'app-menuadd',
@@ -101,19 +101,23 @@ export class MenuaddComponent implements OnInit {
       x
     ] as FormControl;
 
-    let relatedOptions = j.addonoptions;
-
-    relatedOptions.forEach((option: { option: string }) => {
-      const addOnOptionForm = this.builder.group({
-        option: this.builder.control<string>(option.option),
-      });
-
-      this.addonOptions(x).push(addOnOptionForm);
-    });
-
     addons.patchValue({
       addonname: j.addonname,
+      addonoptions: j.addonoptions,
     });
+
+    if (addons.value.addonoptions.length < 1) {
+      let relatedOptions = j.addonoptions;
+
+      relatedOptions.forEach((option: { option: string }) => {
+        const addOnOptionForm = this.builder.group({
+          option: this.builder.control<string>(option.option),
+        });
+
+        this.addonOptions(x).push(addOnOptionForm);
+        this.addOptionIsHidden.push(true);
+      });
+    }
 
     this.addIsHidden[x] = true;
   }
@@ -233,15 +237,17 @@ export class MenuaddComponent implements OnInit {
     if (!imageValue) {
       let sideImageData = this.sideImageData;
 
-      let correctImage;
-
-      sideImageData.filter((item) => {
-        if (item.imageName === imageName) {
-          correctImage = item.image;
-        }
+      let correctImage = sideImageData.find((item) => {
+        return item.imageName === imageName;
       });
 
-      return correctImage;
+      console.log('correct item image', correctImage);
+
+      if (!correctImage) {
+        return false;
+      } else {
+        return correctImage.image;
+      }
     } else if (!imageValue && !imageName) {
       return false;
     } else {
@@ -340,8 +346,16 @@ export class MenuaddComponent implements OnInit {
         itemType,
         imageName,
       })
-      .subscribe((response) => {
+      .subscribe((response: ResponseObject) => {
         console.log('response on create Menu Item method', response);
+
+        if (response.status === 200) {
+          alert(response.message);
+        } else if (response.status === 400) {
+          alert('Bad request please ensure all fields are filled in correctly');
+        } else if (response.status === 401) {
+          alert(response.message);
+        }
       });
   }
 
