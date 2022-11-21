@@ -24,13 +24,24 @@ button {
 }
 .list-item{
     margin: 5%;
+   height: 30em;
+   width: 28em;
+   background-color: black;
+   color: #31C6D4;
     
 }
 .menu-list{
+
     background-color:#31C6D4;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     
+}
+.item-image {
+    height: 20em;
+   width: 20em;
+    margin-left: 14%;
+    border-radius: 20%;
 }
 
 .ng-star-inserted {

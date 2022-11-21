@@ -53,6 +53,8 @@ export class MenuComponent implements OnInit {
       this.sidesmenu = menu.sidesmenu;
 
       console.log(
+        'items',
+        this.items,
         'set item types',
         this.itemTypes,
         'sides menu',
